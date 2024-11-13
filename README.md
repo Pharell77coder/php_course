@@ -1,35 +1,10 @@
-# PHP Course 
 
-## TITRE
+# Course-Php
 
-### HTML
+A brief description of what this project does and who it's for
 
-HTML
-```html 
-<h1>c'est de html</h1>
-```
 
-### CSS
+## Authors
 
-CSS
-```css 
-.html{
-    h1: 2rem;
-}
-```
+- [@DevFendrix](https://github.com/devFendrix)
 
-## TITRE
-
-### Javascript
-
-Javascript
-```js 
-const dix = 10;
-```
-
-### PHP
-
-PHP
-```php 
-$variable = 'une variable';
-```
