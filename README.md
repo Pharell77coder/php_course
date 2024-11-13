@@ -1,10 +1,16 @@
 
 # Course-Php
 
-A brief description of what this project does and who it's for
+Cours en php
 
 
-## Authors
+## Auteurs
 
 - [@DevFendrix](https://github.com/devFendrix)
+- [@Pharell77coder](https://github.com/Pharell77coder)
 
+### Installation docker
+
+```bash
+docker compose up -d
+```
