@@ -1,35 +1,36 @@
-version: '3'
-
 services:
-  apache:
+  php:
     build:
-      context: ./apache
-      dockerfile: Dockerfile
+      context: ./php
+    container_name: php-container
+    volumes:
+      - ./www:/var/www/html
+      - ./config/custom.ini:/usr/local/etc/php/conf.d/custom.ini
     ports:
       - "8080:80"
-    volumes:
-      - ./app:/var/www/html
     depends_on:
       - mariadb
     networks:
-      - phpcourse
+      - app-network
 
   mariadb:
-    image: mariadb:10.11
-    restart: always
-    container_name: php-course-db
+    image: mariadb:latest
+    container_name: mariadb-container
     environment:
-      MYSQL_ROOT_PASSWORD: devdev
-      MYSQL_USER: dev
-      MYSQL_PASSWORD: dev
-      MYSQL_DATABASE: php_course
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: database
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: password
     ports:
       - "3306:3306"
     volumes:
-      - ./bdd/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - mariadb_data:/var/lib/mysql
     networks:
-      - phpcourse
+      - app-network
+
+volumes:
+  mariadb_data:
 
 networks:
-  phpcourse:
+  app-network:
     driver: bridge
