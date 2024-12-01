@@ -35,6 +35,15 @@ CREATE TABLE IF NOT EXISTS cars_users (
     FOREIGN KEY (id_car) REFERENCES cars(id)
 );
 
+
+ALTER TABLE cars_users DROP FOREIGN KEY cars_users_ibfk_1;
+
+ALTER TABLE cars_users 
+ADD CONSTRAINT cars_users_ibfk_1 
+FOREIGN KEY (id_user) REFERENCES users(id) ON DELETE CASCADE;
+
+SHOW CREATE TABLE cars_users;
+
 -- Insérer un utilisateur administrateur avec un mot de passe haché (hachage simulé ici)
 INSERT INTO users (username, email, password) VALUES
 ('administrateur', 'admin@example.com', '$2y$10$somehash...');
