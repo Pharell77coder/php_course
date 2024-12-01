@@ -22,14 +22,13 @@ $users = $query->fetchAll(PDO::FETCH_OBJ);
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Formulaire des utilisateurs </title>
+        <title>Tableau des utilisateurs </title>
         <link rel="stylesheet" href="public/css/style.css">
     </head>
     <body>
     <h1>PHP Test Page</h1>
     <div class="welcome-box">
-        <h1>Bienvenue, <?= htmlspecialchars($username); ?> !</h1>
-        <p>Vous êtes connecté avec succès.</p>
+        <h1><?= htmlspecialchars($username); ?></h1>
         <a href="./../../entities/logout.php">Déconnexion</a>
     </div>
     <?php if ($users): ?>

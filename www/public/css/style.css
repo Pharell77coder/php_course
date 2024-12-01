@@ -9,6 +9,36 @@ body {
     height: 100vh;
 }
 
+
+/* Conteneur global */
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Deux colonnes */
+    grid-template-rows: auto auto auto; /* Trois lignes */
+    gap: 20px; /* Espacement entre les éléments */
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Lignes et colonnes */
+.l1c1, .l1c2 {
+    text-align: center;
+}
+
+.l1c1 h1, .l1c2 h1 {
+    font-size: 1.5em;
+    color: #333;
+}
+
+.l2c1, .l2c2 {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
 form {
     background-color: #fff;
     padding: 20px;

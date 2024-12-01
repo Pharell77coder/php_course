@@ -9,12 +9,12 @@ if (isset($_SESSION['username'])) {
 }
 
 require_once './../../entities/database.php';
-require_once './../../entities/User.php';
+require_once './../../entities/Cars.php';
 
 $db = connect();
-$query = $db->prepare("SELECT id, username, email, password, created_at FROM users");
+$query = $db->prepare("SELECT id, model, brand, price, build_at FROM cars");
 $query->execute();
-$users = $query->fetchAll(PDO::FETCH_OBJ);
+$cars = $query->fetchAll(PDO::FETCH_OBJ);
 
 ?>
 <!DOCTYPE html>
@@ -22,31 +22,34 @@ $users = $query->fetchAll(PDO::FETCH_OBJ);
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Formulaire des utilisateurs </title>
+        <title>Tableau des voitures </title>
         <link rel="stylesheet" href="public/css/style.css">
     </head>
     <body>
     <h1>PHP Test Page</h1>
     <div class="welcome-box">
-        <h1>Bienvenue, <?= htmlspecialchars($username); ?> !</h1>
-        <p>Vous êtes connecté avec succès.</p>
-        <a href="./../../entities/logout.php">Déconnexion</a>
+    <h1><?= htmlspecialchars($username); ?></h1>
+    <a href="./../../entities/logout.php">Déconnexion</a>
     </div>
-    <?php if ($users): ?>
+    <?php if ($cars): ?>
         <table>
             <tr>
-                <th>Pseudo</th>
-                <th>Email</th>
+                <th>model</th>
+                <th>brand</th>
+                <th>price</th>
+                <th>build_at</th>
                 <th>Modification</th>
             </tr>
-            <?php foreach ($users as $user): ?>
+            <?php foreach ($cars as $car): ?>
                 <form class="form-users" method="POST">
                     <tr>
-                        <td><?= $user->username ?></td>
-                        <td><?= $user->email ?></td>
+                        <td><?= $car->model ?></td>
+                        <td><?= $car->brand ?></td>
+                        <td><?= $car->price ?></td>
+                        <td><?= $car->build_at ?></td>
                         <td>
-                            <button class="update-user" name="update-user">Modifier</button>
-                            <button class="delete-user" name="delete-user">Supprimer</button>
+                            <button class="update-car" name="update-car">Modifier</button>
+                            <button class="delete-car" name="delete-car">Supprimer</button>
                         </td>
                     </tr>
                 </form>
