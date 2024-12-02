@@ -65,17 +65,17 @@
     <h1>Gestion des voitures</h1>
 
     <form id="form_user" method="POST">
-    <label for="model">Pseudo :</label>
-    <input type="text" id="model" name="model" placeholder="Votre Nom d'utilisateur..">
+    <label for="model">Modèle :</label>
+    <input type="text" id="model" name="model" placeholder="Modèle..">
 
-    <label for="brand">Email :</label>
-    <input type="text" id="brand" name="brand" placeholder="Votre adresse mail..">
+    <label for="brand">Marque :</label>
+    <input type="text" id="brand" name="brand" placeholder="Marque..">
 
-    <label for="price">Mot de passe :</label>
-    <input type="number" step="0.01" id="price" name="price" placeholder="Votre pseudo..">
+    <label for="price">Prix :</label>
+    <input type="number" step="0.01" id="price" name="price" placeholder="Prix..">
     
     <label for="build_at">Date de fabrication:</label>
-    <input type="date" id="build_at" name="build_at" placeholder="Votre pseudo..">
+    <input type="date" id="build_at" name="build_at" placeholder="Fabrication..">
     <br>
 
     <input type="submit" name="insert-car" id="submit-btn" value="Envoyer">
