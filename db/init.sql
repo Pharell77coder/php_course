@@ -36,13 +36,12 @@ CREATE TABLE IF NOT EXISTS cars_users (
 );
 
 
-ALTER TABLE cars_users DROP FOREIGN KEY cars_users_ibfk_1;
+ALTER TABLE cars_users
+DROP FOREIGN KEY cars_users_ibfk_2;
 
-ALTER TABLE cars_users 
-ADD CONSTRAINT cars_users_ibfk_1 
-FOREIGN KEY (id_user) REFERENCES users(id) ON DELETE CASCADE;
-
-SHOW CREATE TABLE cars_users;
+ALTER TABLE cars_users
+ADD CONSTRAINT cars_users_ibfk_2
+FOREIGN KEY (id_car) REFERENCES cars(id) ON DELETE CASCADE;
 
 -- Insérer un utilisateur administrateur avec un mot de passe haché (hachage simulé ici)
 INSERT INTO users (username, email, password) VALUES
@@ -57,5 +56,8 @@ INSERT INTO cars (model, brand, price, build_at) VALUES
 INSERT INTO cars_users (id_user, id_car, assigned_at) VALUES
 (1, 1, '2023-11-01'),
 (1, 2, '2023-11-15');
+
+ALTER TABLE cars ADD plate CHAR(10);
+UPDATE cars SET plate = CONCAT('AA-', LPAD(id, 3, '0'), '-ZZ');
 
 SET FOREIGN_KEY_CHECKS=1;  -- réactiver la sécurité des clé étrangeres

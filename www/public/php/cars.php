@@ -14,11 +14,15 @@
 
     // Insertion dans la base de données
     if(isset($_POST['insert-car'])) {
-        Car::create($db, $_POST['model'], $_POST['brand'], $_POST['price'], $_POST['build_at']);
+        Car::create($db, $_POST['model'], $_POST['brand'], $_POST['price'], $_POST['build_at'], $_POST['plate']);
     }
     // Suppression d'une voiture
     if (isset($_POST['delete-car'])) {
+
         $carId = (int)$_POST['id-car'];
+        
+        $deleteCarsUsers = $db->prepare("DELETE FROM cars_users WHERE id_car = :id_car");
+        $deleteCarsUsers->execute(['id_car' => $carId]);
 
         $deleteQuery = $db->prepare("DELETE FROM cars WHERE id = :id");
         $deleteQuery->execute(['id' => $carId]);
@@ -32,20 +36,22 @@
         $brand = htmlspecialchars($_POST['brand']);
         $price = (float)$_POST['price'];
         $buildAt = htmlspecialchars($_POST['build_at']);
+        $plate = htmlspecialchars($_POST['plate']);
 
-        $updateQuery = $db->prepare("UPDATE cars SET model = :model, brand = :brand, price = :price, build_at = :build_at WHERE id = :id");
+        $updateQuery = $db->prepare("UPDATE cars SET model = :model, brand = :brand, price = :price, build_at = :build_at, plate = :plate WHERE id = :id");
         $updateQuery->execute([
             'model' => $model,
             'brand' => $brand,
             'price' => $price,
             'build_at' => $buildAt,
+            'plate' => $plate,
             'id' => $carId
         ]);
 
     }
 
     // Récupération de la liste des voitures
-    $query = $db->prepare("SELECT id, model, brand, price, build_at FROM cars");
+    $query = $db->prepare("SELECT id, model, brand, price, build_at, plate FROM cars");
     $query->execute();
     $cars = $query->fetchAll(PDO::FETCH_OBJ);
 ?>
@@ -76,6 +82,10 @@
     
     <label for="build_at">Date de fabrication:</label>
     <input type="date" id="build_at" name="build_at" placeholder="Fabrication..">
+
+    <label for="plate">Plaque d'imatriculation:</label>
+    <input type="text" id="plate" name="plate" placeholder="Numéro de plaque..." pattern="[A-Za-z]{2}-[0-9]{3}-[A-Za-z]{2}" 
+        title="Le format doit être XX-000-XX, avec deux lettres, trois chiffres, puis deux lettres." required>
     <br>
 
     <input type="submit" name="insert-car" id="submit-btn" value="Envoyer">
@@ -106,6 +116,10 @@
                         </td>
                         <td>
                             <input type="date" name="build_at" value="<?= htmlspecialchars($car->build_at) ?>" required>
+                        </td>
+                        <td>
+                        <input type="text" id="plate" name="plate" value="<?= htmlspecialchars($car->plate) ?>" pattern="[A-Za-z]{2}-[0-9]{3}-[A-Za-z]{2}" 
+                        title="Le format doit être XX-000-XX, avec deux lettres, trois chiffres, puis deux lettres." required>
                         </td>
                         <td>
                             <input type="hidden" name="id-car" value="<?= $car->id ?>">
