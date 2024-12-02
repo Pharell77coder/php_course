@@ -1,18 +1,9 @@
-/* Style global de la page */
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f9;
-    color: #333;
-}
-
 /* Style de l'en-tête */
 .header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: #4CAF50; /* Vert */
+    background-color: greenyellow;
     color: white;
     padding: 10px 20px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -35,7 +26,7 @@ body {
 
 /* Liens au survol */
 .header a:hover {
-    color: #f1c40f; /* Jaune doré */
+    color: #f1c40f; 
 }
 
 /* Nom d'utilisateur */
@@ -43,12 +34,12 @@ body {
     margin: 0;
     font-weight: bold;
     font-size: 16px;
-    color: #e8f5e9; /* Blanc cassé */
+    color: #e8f5e9;
 }
 
 /* Dernier lien (Déconnexion) */
 .header a:last-child {
-    background-color: #e74c3c; /* Rouge */
+    background-color: #e74c3c;
     padding: 5px 10px;
     border-radius: 5px;
     font-size: 14px;
@@ -57,6 +48,6 @@ body {
 }
 
 .header a:last-child:hover {
-    background-color: #c0392b; /* Rouge plus foncé */
+    background-color: #c0392b; 
     color: white;
 }

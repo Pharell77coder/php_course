@@ -9,9 +9,13 @@
     }
 
     require_once './../../entities/database.php';
-
+    require_once './../../entities/Cars.php';
     $db = connect();
 
+    // Insertion dans la base de données
+    if(isset($_POST['insert-car'])) {
+        Car::create($db, $_POST['model'], $_POST['brand'], $_POST['price'], $_POST['build_at']);
+    }
     // Suppression d'une voiture
     if (isset($_POST['delete-car'])) {
         $carId = (int)$_POST['id-car'];
@@ -53,11 +57,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestion des voitures</title>
     <link rel="stylesheet" href=".\..\css\header.css">
+    <link rel="stylesheet" href=".\..\css\global.css">
 </head>
 <body>
     <?php include './include/header.php'; ?>
 
     <h1>Gestion des voitures</h1>
+
+    <form id="form_user" method="POST">
+    <label for="model">Pseudo :</label>
+    <input type="text" id="model" name="model" placeholder="Votre Nom d'utilisateur..">
+
+    <label for="brand">Email :</label>
+    <input type="text" id="brand" name="brand" placeholder="Votre adresse mail..">
+
+    <label for="price">Mot de passe :</label>
+    <input type="number" step="0.01" id="price" name="price" placeholder="Votre pseudo..">
+    
+    <label for="build_at">Date de fabrication:</label>
+    <input type="date" id="build_at" name="build_at" placeholder="Votre pseudo..">
+    <br>
+
+    <input type="submit" name="insert-car" id="submit-btn" value="Envoyer">
+    </form>
+
 
     <?php if ($cars): ?>
         <table>

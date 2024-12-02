@@ -13,6 +13,10 @@
 
     $db = connect();
 
+    // Insertion dans la base de données
+    if(isset($_POST['insert-user'])) {
+        User::create($db, $_POST['username'], $_POST['email'], $_POST['password']);
+    }
     // Suppression d'un utilisateur
     if (isset($_POST['delete-user'])) {
         $userId = (int)$_POST['id-user'];
@@ -37,6 +41,7 @@
     $query->execute();
     $users = $query->fetchAll(PDO::FETCH_OBJ);
 ?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -44,11 +49,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestion des utilisateurs</title>
     <link rel="stylesheet" href=".\..\css\header.css">
+    <link rel="stylesheet" href=".\..\css\global.css">
 </head>
 <body>
     <?php include './include/header.php'; ?>
 
     <h1>Gestion des utilisateurs</h1>
+
+    <form id="form_user" method="POST">
+    <label for="username">Pseudo :</label>
+    <input type="text" id="username" name="username" placeholder="Votre Nom d'utilisateur..">
+
+    <label for="email">Email :</label>
+    <input type="text" id="email" name="email" placeholder="Votre adresse mail..">
+
+    <label for="password">Mot de passe :</label>
+    <input type="text" id="password" name="password" placeholder="Votre pseudo..">
+    <br>
+
+    <input type="submit" name="insert-user" id="submit-btn" value="Envoyer">
+    </form>
 
     <?php if ($users): ?>
         <table>
